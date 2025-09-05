@@ -1,16 +1,64 @@
-<head>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <div class="resume-container">
-        <h1>Віктор Мо</h1>
-        <div class="section">
-            <h2>Досвід роботи</h2>
-            <p>Тут твій досвід...</p>
-        </div>
-        <div class="section">
-            <h2>Освіта</h2>
-            <p>Тут освіта...</p>
-        </div>
-    </div>
-</body>
+/* Загальні стилі сторінки */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #6dd5fa, #2980b9);
+    color: #fff;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Контейнер резюме */
+.resume-container {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-radius: 20px;
+    padding: 40px;
+    max-width: 600px;
+    width: 90%;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+/* Заголовки */
+h1, h2, h3 {
+    margin: 0 0 10px 0;
+    font-weight: 600;
+}
+
+/* Розділи резюме */
+.section {
+    margin-bottom: 20px;
+}
+
+/* Посилання */
+a {
+    color: #00f0ff;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Кнопки (якщо є) */
+button {
+    background: rgba(255,255,255,0.2);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 12px;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    backdrop-filter: blur(10px);
+    transition: 0.3s;
+}
+
+button:hover {
+    background: rgba(255,255,255,0.3);
+}
