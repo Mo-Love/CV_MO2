@@ -1,64 +1,185 @@
-/* Загальні стилі сторінки */
-body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #6dd5fa, #2980b9);
-    color: #fff;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+:root {
+  --bg: linear-gradient(135deg, #0b0d12 0%, #131824 100%);
+  --glass: rgba(255, 255, 255, 0.08);
+  --glass-border: rgba(255, 255, 255, 0.18);
+  --ink: #f1f5f9;
+  --muted: #a3adc2;
+  --pri: #58a6ff;
+  --accent: #7ee787;
+  --warn: #ffdd57;
+  --radius: 20px;
+  --pad: clamp(16px, 2vw, 28px);
+  --w: 1100px;
+  --blur: 18px;
 }
 
-/* Контейнер резюме */
-.resume-container {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    border-radius: 20px;
-    padding: 40px;
-    max-width: 600px;
-    width: 90%;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.25);
-    border: 1px solid rgba(255, 255, 255, 0.18);
+* {
+  box-sizing: border-box;
 }
 
-/* Заголовки */
-h1, h2, h3 {
-    margin: 0 0 10px 0;
-    font-weight: 600;
+html, body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, "Helvetica Neue", Arial;
 }
 
-/* Розділи резюме */
-.section {
-    margin-bottom: 20px;
-}
-
-/* Посилання */
 a {
-    color: #00f0ff;
-    text-decoration: none;
-    transition: 0.3s;
+  color: var(--pri);
+  text-decoration: none;
+  transition: 0.2s ease;
 }
-
 a:hover {
-    text-decoration: underline;
+  text-shadow: 0 0 6px var(--pri);
 }
 
-/* Кнопки (якщо є) */
-button {
-    background: rgba(255,255,255,0.2);
-    border: none;
-    padding: 10px 20px;
-    border-radius: 12px;
-    color: #fff;
-    font-weight: bold;
-    cursor: pointer;
-    backdrop-filter: blur(10px);
-    transition: 0.3s;
+/* Container */
+.wrap {
+  max-width: var(--w);
+  margin: auto;
+  padding: clamp(18px, 4vw, 42px);
 }
 
-button:hover {
-    background: rgba(255,255,255,0.3);
+/* Cards (Glass effect) */
+.card, .section {
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  padding: var(--pad);
+  backdrop-filter: blur(var(--blur)) saturate(180%);
+  -webkit-backdrop-filter: blur(var(--blur)) saturate(180%);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.45);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card:hover, .section:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.55);
+}
+
+/* HERO */
+.hero {
+  display: grid;
+  grid-template-columns: 1.1fr .9fr;
+  gap: clamp(18px, 4vw, 32px);
+  align-items: stretch;
+}
+.hero h1 {
+  margin: .1rem 0 .2rem;
+  font-size: clamp(36px, 6vw, 56px);
+  letter-spacing: .5px;
+  text-shadow: 0 0 10px rgba(88, 166, 255, 0.4);
+}
+.subtitle {
+  font-weight: 700;
+  letter-spacing: .1em;
+  color: var(--accent);
+  text-transform: uppercase;
+  text-shadow: 0 0 6px rgba(126, 231, 135, 0.6);
+}
+
+.meta {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px 20px;
+  margin-top: 12px;
+  color: var(--muted);
+}
+
+/* Chips */
+.chips {
+  margin-top: 14px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.chip {
+  border: 1px solid var(--glass-border);
+  background: rgba(255,255,255,0.06);
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-size: .92rem;
+  color: #e2e8f0;
+  backdrop-filter: blur(12px);
+}
+
+/* Sections */
+section { margin-top: 28px; }
+.section h2 {
+  margin: 0 0 10px;
+  font-size: clamp(20px, 3vw, 26px);
+  text-shadow: 0 0 8px rgba(255,255,255,0.15);
+}
+.muted { color: var(--muted); }
+
+/* Two-column responsive */
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(14px, 2.6vw, 22px);
+}
+@media (max-width: 880px) {
+  .hero { grid-template-columns: 1fr; }
+  .grid-2 { grid-template-columns: 1fr; }
+}
+
+/* Timeline / items */
+.item { padding: 14px 0; border-top: 1px dashed rgba(255,255,255,0.12); }
+.item:first-child { border-top: 0; padding-top: 0; }
+.item h3 { margin: .2rem 0; font-size: 1.05rem; }
+.item .when { font-size: .92rem; color: var(--muted); }
+.bullets { margin: .35rem 0 0; padding-left: 18px; }
+.bullets li { margin: .2rem 0; }
+
+/* Pills list */
+.pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.pill {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.18);
+  color: #dce3ef;
+  padding: 6px 10px;
+  border-radius: 10px;
+  font-size: .93rem;
+  backdrop-filter: blur(10px);
+}
+
+/* Metrics */
+.metrics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 6px;
+}
+.metric {
+  border: 1px solid rgba(255,255,255,0.14);
+  background: rgba(255,255,255,0.05);
+  border-radius: 12px;
+  padding: 10px 12px;
+  min-width: 120px;
+  backdrop-filter: blur(14px);
+}
+.metric b {
+  display: block;
+  font-size: 1.05rem;
+  color: var(--warn);
+  text-shadow: 0 0 8px rgba(255, 221, 87, 0.5);
+}
+
+/* Footer */
+footer {
+  color: #9da6bb;
+  text-align: center;
+  padding: 26px 0;
+  font-size: .92rem;
+}
+
+/* Print */
+@media print {
+  :root { --bg: #fff; --ink: #111; }
+  body { background: #fff; }
+  .card, .section { box-shadow: none; border-color: #ddd; backdrop-filter: none; }
+  a { color: #0645ad; text-shadow: none; }
 }
