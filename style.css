@@ -1,0 +1,307 @@
+/* Додаємо Liquid Glass стилі, зберігаючи ваші змінні */
+:root {
+  --bg: #0b0d12; /* темний фон */
+  --card: rgba(17, 20, 27, 0.6); /* напівпрозорий фон для карток */
+  --ink: #e8ebf1;
+  --muted: #a9b0bd;
+  --pri: #58a6ff;
+  --accent: #7ee787;
+  --warn: #ffdd57;
+  --pad: clamp(14px, 1.8vw, 22px);
+  --radius: 24px; /* більший радіус для Liquid Glass */
+  --w: 1100px;
+  --glass-border: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.2),
+    rgba(255, 255, 255, 0.05)
+  );
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  --glass-blur: blur(10px);
+}
+
+/* Оновлення базових стилів */
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu,
+    "Helvetica Neue", Arial;
+}
+a {
+  color: var(--pri);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+a:hover {
+  color: var(--accent);
+  text-decoration: none;
+}
+.wrap {
+  max-width: var(--w);
+  margin: auto;
+  padding: clamp(18px, 4vw, 42px);
+}
+
+/* Hero Section - Liquid Glass ефект */
+.hero {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: clamp(18px, 4vw, 32px);
+  align-items: stretch;
+}
+.hero .card {
+  padding: var(--pad);
+  background: rgba(19, 24, 36, 0.5); /* напівпрозорий фон */
+  border: 1px solid transparent;
+  border-image: var(--glass-border) 1;
+  border-radius: var(--radius);
+  box-shadow: var(--glass-shadow);
+  backdrop-filter: var(--glass-blur);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.hero .card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+}
+.hero .card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: left 0.5s ease;
+}
+.hero .card:hover::before {
+  left: 100%;
+}
+.hero h1 {
+  margin: 0.1rem 0 0.2rem;
+  font-size: clamp(36px, 6vw, 56px);
+  letter-spacing: 0.5px;
+  background: linear-gradient(45deg, var(--ink), var(--accent));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.subtitle {
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+  text-transform: uppercase;
+  text-shadow: 0 0 10px rgba(126, 231, 135, 0.5);
+}
+
+/* Meta */
+.meta {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px 20px;
+  margin-top: 12px;
+}
+.meta div {
+  color: var(--muted);
+  transition: color 0.3s ease;
+}
+.meta div:hover {
+  color: var(--ink);
+}
+
+/* Chips */
+.chips {
+  margin-top: 14px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.chip {
+  border: 1px solid transparent;
+  border-image: var(--glass-border) 1;
+  background: rgba(18, 24, 38, 0.6);
+  backdrop-filter: var(--glass-blur);
+  border-radius: 999px;
+  padding: 6px 12px;
+  color: #c7d0dd;
+  font-size: 0.92rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.chip:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Sections */
+section {
+  margin-top: 28px;
+}
+.section {
+  background: rgba(17, 20, 27, 0.6);
+  border: 1px solid transparent;
+  border-image: var(--glass-border) 1;
+  border-radius: var(--radius);
+  padding: var(--pad);
+  backdrop-filter: var(--glass-blur);
+  box-shadow: var(--glass-shadow);
+  transition: transform 0.3s ease;
+}
+.section:hover {
+  transform: translateY(-3px);
+}
+.section h2 {
+  margin: 0 0 10px;
+  font-size: clamp(20px, 3vw, 26px);
+  background: linear-gradient(45deg, var(--ink), var(--pri));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.muted {
+  color: var(--muted);
+}
+
+/* Two-column responsive */
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(14px, 2.6vw, 22px);
+}
+@media (max-width: 880px) {
+  .hero {
+    grid-template-columns: 1fr;
+  }
+  .grid-2 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Timeline / items */
+.item {
+  padding: 14px 0;
+  border-top: 1px dashed rgba(42, 52, 70, 0.5);
+}
+.item:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+.item h3 {
+  margin: 0.2rem 0;
+  font-size: 1.05rem;
+  color: var(--ink);
+}
+.item .when {
+  font-size: 0.92rem;
+  color: var(--muted);
+}
+.bullets {
+  margin: 0.35rem 0 0;
+  padding-left: 18px;
+}
+.bullets li {
+  margin: 0.2rem 0;
+  position: relative;
+}
+.bullets li::before {
+  content: "";
+  position: absolute;
+  left: -18px;
+  top: 8px;
+  width: 6px;
+  height: 6px;
+  background: var(--accent);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--accent);
+}
+
+/* Pills */
+.pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.pill {
+  background: rgba(18, 24, 37, 0.6);
+  border: 1px solid transparent;
+  border-image: var(--glass-border) 1;
+  color: #cbd3df;
+  padding: 6px 10px;
+  border-radius: 10px;
+  font-size: 0.93rem;
+  backdrop-filter: var(--glass-blur);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.pill:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Metrics */
+.metrics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 6px;
+}
+.metric {
+  border: 1px solid transparent;
+  border-image: var(--glass-border) 1;
+  background: rgba(15, 21, 34, 0.6);
+  backdrop-filter: var(--glass-blur);
+  border-radius: 12px;
+  padding: 10px 12px;
+  min-width: 120px;
+  transition: transform 0.3s ease;
+}
+.metric:hover {
+  transform: translateY(-2px);
+}
+.metric b {
+  display: block;
+  font-size: 1.05rem;
+  color: var(--warn);
+  text-shadow: 0 0 8px rgba(255, 221, 87 0.5);
+}
+
+/* Footer */
+footer {
+  color: #8f97a5;
+  text-align: center;
+  padding: 26px 0;
+  background: rgba(17, 20, 27, 0.4);
+  border-radius: var(--radius);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid transparent;
+  border-image: var(--glass-border) 1;
+}
+
+/* Print */
+@media print {
+  :root {
+    --bg: #fff;
+    --ink: #111;
+    --card: #fff;
+  }
+  body {
+    background: #fff;
+  }
+  .section,
+  .hero .card {
+    box-shadow: none;
+    border-color: #ddd;
+    backdrop-filter: none;
+  }
+  a {
+    color: #0645ad;
+  }
+}
